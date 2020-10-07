@@ -154,24 +154,24 @@ adulto_persona2 <- adulto_persona %>%
 #' *Medellin*
 medellin1 <- subset(adulto_persona2, DEPTO == "ANTIOQUIA" & cabecera.x == 1)
 medellin2 <- subset(adulto_persona2, nivel_urb == 1)
-write_csv(medellin1, "data/medellin/pa_medellin.csv")
-write_csv(medellin2, "data/medellin/pa_medellin2.csv")
+write_csv(medellin1, "data/local/medellin/pa_medellin.csv")
+write_csv(medellin2, "data/local/medellin/pa_medellin2.csv")
 
 
 #' *Monteria*
 monteria1 <- subset(adulto_persona2, DEPTO == "CORDOBA" & cabecera.x == 1)
 monteria2 <- subset(adulto_persona2, nivel_urb == 1)
-write_csv(monteria1, "data/monteria/pa_monteria.csv")
-write_csv(monteria2, "data/monteria/pa_monteria2.csv")
+write_csv(monteria1, "data/local/monteria/pa_monteria.csv")
+write_csv(monteria2, "data/local/monteria/pa_monteria2.csv")
 
 #' *Cali*
 cali1 <- subset(adulto_persona2, DEPTO == "VALLE DEL CAUCA" & cabecera.x == 1)
 cali2 <- subset(adulto_persona2, nivel_urb == 1)
-write_csv(cali1, "data/cali/pa_cali.csv")
-write_csv(cali2, "data/cali/pa_cali2.csv")
+write_csv(cali1, "data/local/cali/pa_cali.csv")
+write_csv(cali2, "data/local/cali/pa_cali2.csv")
 
 #' *Pereira*
 pereira1 <- subset(adulto_persona2, DEPTO == "RISARALDA" & cabecera.x == 1)
 pereira2 <- subset(adulto_persona2, nivel_urb == 1)
-write_csv(pereira1, "data/medellin/pa_pereira.csv")
-write_csv(pereira2, "data/medellin/pa_pereira2.csv")
+write_csv(pereira1, "data/local/pereira/pa_pereira.csv")
+write_csv(pereira2, "data/local/pereira/pa_pereira2.csv")
