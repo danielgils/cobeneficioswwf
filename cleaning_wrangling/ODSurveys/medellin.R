@@ -1,32 +1,34 @@
-#' Script para organizar la información de los viajes en Medellin
+#' Script to get trips dataset cleaned for Medellin
 #' Daniel Gil
-#' Octubre 2020
+#' October 2020
 
-#' Se limpiar el Workspace
+#' Cleaning Workspace
 rm(list = ls())
 
-#' Para mostrar/exportar con todos los decimales posibles
+#' To show/export more decimal points
 options(scipen = 50)
 
-#' Se cargan las librerias
+#' Loading libraries
 library(tidyverse)
 library(readxl)
 
-#' Se carga la funcion para estandarizar los modos
-source("cleaning_wrangling/EncuestasOD/otrasfunciones.R")
+#' Loading function that standardizes modes
+source("cleaning_wrangling/ODSurveys/otherfunctions")
 
-#' Se importan los datasets
+#' Importing datasets
 route <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2020/WWF/Datos/Local/Medellin/EOD2017/"
+
 trips <- read_excel(paste0(route, "EOD_2017_DatosViajes.xlsx"), sheet = "DATOS VIAJES")
 trips <- trips[rowSums(is.na(trips)) != ncol(trips), ] # Removing files that only have NAs
 #' When reading person there are some warnings related to people without age
 person <- read_excel(paste0(route, "EOD_2017_DatosViajes.xlsx"), sheet = "DATOS MORADORES")
 #hogar <- read_excel(paste0(route, "EOD_2017_DatosViajes.xlsx"), sheet = "DATOS HOGARES")
 
-#' Se importa la jerarquía usada para definir el modo principal de cada viaje.
-#' Este archivo lo hice yo (Daniel), a mi criterio. En teoria Saul Andrés
-#' Rivera Betancur <saul.rivera@metropol.gov.co> del ANVA, quedo de enviarme la
-#' jerarquia pero no la he recibido
+#' Importing hierarchy to define the main mode of each trip.
+#' This file was done by me (Daniel), at my own criteria.
+#' In theory Saul Andrés Rivera Betancur <saul.rivera@metropol.gov.co> from ANVA,
+#' was going to send me the official hierarchy used in the survey but I haven't
+#' received anything
 main_mode <- read_excel(paste0(route, "Jerarquia.xlsx"), sheet = "Medellin")
 
 # In person, create an ID for each person taking into account its household

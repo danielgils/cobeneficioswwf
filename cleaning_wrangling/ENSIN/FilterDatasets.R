@@ -1,20 +1,19 @@
-#' Script para organizar la información y sacar el dataset correspondiente a
-#' cada ciudad
+#' Script to organize physical activity datasets for each city
 #' Daniel Gil
-#' Agosto 2020
+#' August 2020
 
-#' Se limpiar el Workspace
+#' Cleaning Workspace
 rm(list = ls())
 
-#' Se cargan las librerias
+#' Loading libraries
 library(tidyverse)
 
-#' Se definen los marginal mets (MMETs) para cada actividad
+#' Defining MMETs for each activity
 MMET_walking <- 2.3 # METS = 3.3 According to International Physical Activity Questionnarie, 2005
 MMET_moderate <- 3 # METS = 4 According to International Physical Activity Questionnarie, 2005
 MMET_vigorous <- 7 # METS = 7 According to International Physical Activity Questionnarie, 2005
 
-#' Se leen las tablas que nos interesan
+#' Importing datasets
 route <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2020/WWF/Datos/Global/ENSIN/base-ensin-2015-publica/Formato_Stata/"
 
 hogar <- read_csv(paste0(route,"PTS.csv"))
@@ -35,7 +34,7 @@ adulto <- read_csv(paste0(route,"AF_ADULTOS.csv"))
 # table(hogar$AREA, hogar$cabecera)
 names(hogar)
 
-#' Filtro las columnas que me interesan
+#' Choosing columns that I'm going to use later
 hogar2 <- subset(hogar, select = c("LLAVE_HOGAR", "Region", "Subregion", "DEPTO",
                                    "C_DEPTO", "AREA", "FactorExpansion"))
 #####
