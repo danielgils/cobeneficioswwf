@@ -13,7 +13,8 @@ library(tidyverse)
 library(readxl)
 
 #' Loading function that standardizes modes
-source("cleaning_wrangling/ODSurveys/otherfunctions")
+#' Here the working directory should be home in the project cobeneficioswwf
+source("cleaning_wrangling/ODSurveys/otherfunctions.R")
 
 #' Importing datasets
 route <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2020/WWF/Datos/Local/Medellin/EOD2017/"
@@ -90,5 +91,5 @@ trips4 <- standardize_modes(trips3, mode = c('trip'))
 rd <- trips4 %>% select(participant_id, age, sex, trip_id, trip_mode, trip_duration)
 
 # Export
-write_csv(rd, 'data/local/medellin/trips_medellin.csv')
+write_csv(rd, 'inst/data/local/medellin/trips_medellin.csv')
 

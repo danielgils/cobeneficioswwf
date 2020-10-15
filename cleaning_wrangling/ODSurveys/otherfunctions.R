@@ -1,7 +1,7 @@
 # Esta funcion la cogi desde el paquete de ithimr
 standardize_modes <- function(trip, mode){
   # Read lookup table
-  smodes <- read_csv('data/global/standardized_modes.csv')
+  smodes <- read_csv('inst/data/global/standardized_modes.csv')
   # Separate rows
   smodes <- smodes %>% separate_rows(original, sep = ';')
 
