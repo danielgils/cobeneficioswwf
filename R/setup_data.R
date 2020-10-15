@@ -12,7 +12,7 @@
 #' @export
 # This function is similar to run_ithim_setup from ithimr package
 setup_data <- function(seed = 1,
-                  project = 'prueba',
+                  project = 'medellin',
                   speeds = NULL,
                   PM_emission_inventory = NULL,
                   setup_call_summary_filename = 'setup_call_summary.txt',
@@ -52,9 +52,11 @@ setup_data <- function(seed = 1,
 
   # Setting global variables
   ADD_WALK_TO_BUS_TRIPS <<- ADD_WALK_TO_BUS_TRIPS
+  PROJECT <<- project
   if(is.null(PATH_TO_LOCAL_DATA)){
-    #PATH_TO_LOCAL_DATA <<- file.path(find.package('ithimr',lib.loc=.libPaths()), 'extdata/local/',CITY,'/')
-    stop("You have to provide a path to project's datasets")
+    PATH_TO_LOCAL_DATA <<- file.path(find.package('cobeneficioswwf',
+                                                  lib.loc=.libPaths()),
+                                     'data/local', PROJECT, '/')
   }else{
     PATH_TO_LOCAL_DATA <<- PATH_TO_LOCAL_DATA
   }
@@ -63,7 +65,7 @@ setup_data <- function(seed = 1,
   DIST_CAT <<- DIST_CAT
 
   ## fixed parameters for AP inhalation
-  # TODO: we have to define whether we are going to used these values or not
+  # TODO: we have to define whether we are going to use these values or not
   BASE_LEVEL_INHALATION_RATE <<- 1
   CLOSED_WINDOW_PM_RATIO <<- 0.5
   CLOSED_WINDOW_RATIO <<- 0.5
@@ -149,5 +151,5 @@ setup_data <- function(seed = 1,
   # TODO: Cambridge added CO2 to the analysis, see whether we should use it as well.
 
   ## LOAD DATA
-  #load_data(setup_call_summary_filename,speeds=default_speeds)
+  load_data(setup_call_summary_filename, speeds = default_speeds)
 }
