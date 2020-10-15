@@ -12,7 +12,7 @@
 #' @export
 # This function is similar to run_ithim_setup from ithimr package
 setup_data <- function(seed = 1,
-                  project = 'medellin',
+                  city = 'medellin',
                   speeds = NULL,
                   PM_emission_inventory = NULL,
                   setup_call_summary_filename = 'setup_call_summary.txt',
@@ -52,11 +52,11 @@ setup_data <- function(seed = 1,
 
   # Setting global variables
   ADD_WALK_TO_BUS_TRIPS <<- ADD_WALK_TO_BUS_TRIPS
-  PROJECT <<- project
+  CITY <<- city
   if(is.null(PATH_TO_LOCAL_DATA)){
     PATH_TO_LOCAL_DATA <<- file.path(find.package('cobeneficioswwf',
                                                   lib.loc=.libPaths()),
-                                     'data/local', PROJECT, '/')
+                                     'data/local', CITY, '/')
   }else{
     PATH_TO_LOCAL_DATA <<- PATH_TO_LOCAL_DATA
   }
@@ -106,8 +106,8 @@ setup_data <- function(seed = 1,
   MODE_SPEEDS <<- data.frame(stage_mode = TRAVEL_MODES, speed = unlist(default_speeds), stringsAsFactors = F)
 
   # Printing the speeds used in the analysis
-  cat('\n -- PROJECT -- \n',file=setup_call_summary_filename,append=F)
-  cat(project,file=setup_call_summary_filename,append=T)
+  cat('\n -- CITY -- \n',file=setup_call_summary_filename,append=F)
+  cat(city,file=setup_call_summary_filename,append=T)
   cat('\n\n -- SPEEDS -- \n\n',file=setup_call_summary_filename,append=T)
   #print(MODE_SPEEDS)
   for(i in 1:nrow(MODE_SPEEDS)) {

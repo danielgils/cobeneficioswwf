@@ -62,7 +62,7 @@ load_data <- function(setup_call_summary_filename,speeds = list(
   ## all trip columns are used for scenario generation alone
   ## stage columns are used for downstream calculation
   ## if either trip or stage labels are missing, we copy over from the other.
-  filename <- paste0(local_path, "trips_", PROJECT, ".csv")
+  filename <- paste0(local_path, "trips_", CITY, ".csv")
   trip_set <- read_csv(filename, col_types = cols())
   cat(paste0('\n  Trips read from ', filename,' \n\n'), file = setup_call_summary_filename, append = T)
   # Create new participant_id
@@ -117,12 +117,12 @@ load_data <- function(setup_call_summary_filename,speeds = list(
   # GBD and population datasets
   # In GBD "cause" column should match what is in DISEASE_INVENTORY (above)
   # Import GBD dataset
-  filename <- paste0(local_path, "/gbd_", PROJECT, ".csv")
+  filename <- paste0(local_path, "/gbd_", CITY, ".csv")
   GBD_DATA <- read_csv(filename, col_types = cols())
   cat(paste0('\n  GBD read from ', filename, ' \n\n'), file = setup_call_summary_filename, append = T)
 
   # Import population dataset
-  filename <- paste0(local_path,"/population_",PROJECT,".csv")
+  filename <- paste0(local_path,"/population_",CITY,".csv")
   demographic <- read_csv(filename,col_types = cols())
   # Remove rows with NA
   demographic <- demographic[!apply(demographic, 1, anyNA),]
@@ -206,7 +206,7 @@ load_data <- function(setup_call_summary_filename,speeds = list(
 
   #####
   ## Physical activity dataset
-  filename <- paste0(local_path, "/pa_", PROJECT, ".csv")
+  filename <- paste0(local_path, "/pa_", CITY, ".csv")
   pa_set <- read_csv(filename,col_types = cols())
   pa_set$sex <- tolower(pa_set$sex)
   PA_SET <<- pa_set
@@ -215,7 +215,7 @@ load_data <- function(setup_call_summary_filename,speeds = list(
   #####
   ## Injuries dataset
   ## injury data
-  filename <- paste0(local_path,"/injuries_", PROJECT,".csv")
+  filename <- paste0(local_path,"/injuries_", CITY,".csv")
   injuries <- read_csv(filename,col_types = cols())
   cat(paste0('\n  Injuries read from ', filename, ' \n\n'), file = setup_call_summary_filename, append = T)
 
@@ -238,4 +238,7 @@ load_data <- function(setup_call_summary_filename,speeds = list(
   ## add weight column if missing
   if (!'weight' %in% colnames(injuries))
     injuries$weight <- 1
+
+  # Call function to set tables for WHW and NOV
+  set_injury_contingency(injuries)
 }

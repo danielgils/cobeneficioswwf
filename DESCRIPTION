@@ -11,5 +11,10 @@ Description: Estimacion de cobeneficios de proyectos
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-Depends: R (>= 4.0.2)
-Imports: readr
+Depends: R (>= 4.0.2),
+    readr,
+    data.table,
+    stringr,
+    dplyr
+
+    
