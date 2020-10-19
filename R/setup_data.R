@@ -63,6 +63,8 @@ setup_data <- function(seed = 1,
 
   AGE_RANGE <<- AGE_RANGE
   DIST_CAT <<- DIST_CAT
+  DIST_LOWER_BOUNDS <<- as.numeric(sapply(strsplit(DIST_CAT, "[^0-9]+"), function(x) x[1]))
+  BUS_WALK_TIME <<- BUS_WALK_TIME
 
   ## fixed parameters for AP inhalation
   # TODO: we have to define whether we are going to use these values or not
@@ -165,6 +167,34 @@ setup_data <- function(seed = 1,
   # TODO: I have to see if I should add setup_parameters function to measure
   # uncertainty.
 
-  # Complete trip dataset with columns needed
+  # Complete trip dataset with columns needed, i.e., trip and stage distances
   complete_trip_distance_duration()
+
+  # Join speeds and pm emissions for each mode in a single dataframe
+  set_vehicle_inventory()
+
+  # Create synthetic population, synthetic trips and scenarios
+  ithim_object$trip_scen_sets <- get_synthetic_from_trips()
+
+  # Compute distances for each scenario
+  ithim_object <- get_all_distances(ithim_object)
+
+  ######################
+
+  casualty_modes <- unique(INJURY_TABLE[[1]]$cas_mode)
+  match_modes <- c(TRIP_SET$stage_mode, 'pedestrian')
+  #if(ADD_TRUCK_DRIVERS) match_modes <- c(match_modes,'truck')
+  if (!all(casualty_modes %in% match_modes)) {
+    cat('\n  The following casualty modes do not have distance data and will not be included in injury module:\n', file = setup_call_summary_filename, append = T)
+    cat(casualty_modes[!casualty_modes %in% match_modes], file = setup_call_summary_filename, append = T)
+    cat('\n\n', file = setup_call_summary_filename, append = T)
+  }
+
+  cat('\n  Emissions will be calculated for the following modes:\n', file = setup_call_summary_filename, append = T)
+  cat(names(PM_EMISSION_INVENTORY)[unlist(PM_EMISSION_INVENTORY) > 0], file = setup_call_summary_filename, append = T)
+  cat("\n  To edit an emission contribution, supply e.g. 'PM_emission_inventory=list(car=4)' in the call to 'run_ithim_setup'.\n\n", file = setup_call_summary_filename, append = T)
+  cat("  To exclude a mode from the emission inventory, supply e.g. 'PM_emission_inventory=list(other=0)' in the call to 'run_ithim_setup'.\n\n", file = setup_call_summary_filename, append = T)
+  cat('\n\n', file = setup_call_summary_filename, append = T)
+
+  return(ithim_object)
 }

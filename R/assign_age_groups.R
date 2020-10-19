@@ -24,9 +24,9 @@ assign_age_groups <- function(dataset, age_category = AGE_CATEGORY,
   dataset$age_cat <- 0
 
   ## Create age categorized: This works assuming more than one age category
-  for(i in 2:length(age_lower_bounds)-1){ # Loop for each age range
+  for (i in 2:length(age_lower_bounds) - 1) { # Loop for each age range
     dataset$age_cat[dataset[[age_label]] >= age_lower_bounds[i] &
-                      dataset[[age_label]] < age_lower_bounds[i+1]] <- age_category[i]
+                      dataset[[age_label]] < age_lower_bounds[i + 1]] <- age_category[i]
   }
 
   # Assign last category to ages larger than the max age-range

@@ -15,6 +15,7 @@ Depends: R (>= 4.0.2),
     readr,
     data.table,
     stringr,
-    dplyr
+    dplyr,
+    tidyr
 
     
