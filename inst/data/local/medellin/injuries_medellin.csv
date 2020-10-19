@@ -1,4 +1,4 @@
-event_id,year,cas_age,cas_sex,cas_mode,strike_mode
+event_id,year,cas_age,cas_gender,cas_mode,strike_mode
 1424250,2014,82,male,pedestrian,motorcycle
 1424277,2014,76,male,pedestrian,motorcycle
 1424358,2014,63,male,pedestrian,car
