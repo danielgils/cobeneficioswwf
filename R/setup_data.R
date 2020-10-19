@@ -142,14 +142,29 @@ setup_data <- function(seed = 1,
   names(default_PM_emission_inventory) <- tolower(names(default_PM_emission_inventory))
 
   PM_EMISSION_INVENTORY <<- default_PM_emission_inventory
-  cat('\n -- PM 2.5 EMISSION INVENTORY -- \n\n',file=setup_call_summary_filename,append=T)
-  for(i in 1:length(default_PM_emission_inventory)) {
-    cat(paste(names(PM_EMISSION_INVENTORY)[i],PM_EMISSION_INVENTORY[[i]]),file=setup_call_summary_filename,append=T);
-    cat('\n',file=setup_call_summary_filename,append=T)
+  cat('\n -- PM 2.5 EMISSION INVENTORY -- \n\n', file = setup_call_summary_filename, append = T)
+  for (i in 1:length(default_PM_emission_inventory)) {
+    cat(paste(names(PM_EMISSION_INVENTORY)[i], PM_EMISSION_INVENTORY[[i]]), file = setup_call_summary_filename, append = T)
+    cat('\n',file = setup_call_summary_filename, append = T)
   }
 
   # TODO: Cambridge added CO2 to the analysis, see whether we should use it as well.
 
   ## LOAD DATA
   load_data(setup_call_summary_filename, speeds = default_speeds)
+
+  if (any(!unique(TRIP_SET$stage_mode) %in% MODE_SPEEDS$stage_mode)) {
+    cat("\n  The following modes do not have speeds, and won't be included in the model:\n",
+        file = setup_call_summary_filename, append = T)
+    cat(unique(TRIP_SET$stage_mode)[!unique(TRIP_SET$stage_mode) %in% MODE_SPEEDS$stage_mode],
+        file = setup_call_summary_filename, append = T)
+    cat("\n\n  To include a mode, or change a speed, supply e.g. 'speeds=list(car=15,hoverboard=30)' in the call to 'run_ithim_setup'.\n\n",
+        file = setup_call_summary_filename, append = T)
+  }
+
+  # TODO: I have to see if I should add setup_parameters function to measure
+  # uncertainty.
+
+  # Complete trip dataset with columns needed
+  complete_trip_distance_duration()
 }

@@ -239,6 +239,7 @@ load_data <- function(setup_call_summary_filename,speeds = list(
   if (!'weight' %in% colnames(injuries))
     injuries$weight <- 1
 
-  # Call function to set tables for WHW and NOV
+  # Call function to set contigency tables for WHW and NOV for each combination
+  # of year, cas_mode, strike_mode, age_cat and cas_gender
   set_injury_contingency(injuries)
 }
