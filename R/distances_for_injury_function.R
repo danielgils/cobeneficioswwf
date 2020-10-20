@@ -49,7 +49,7 @@ distances_for_injury_function <- function(journeys, dist){
                                              scenarios = SCEN[1])
 
   scenario_injury_table <- list()
-  for(type in INJURY_TABLE_TYPES)
+  for (type in INJURY_TABLE_TYPES)
     scenario_injury_table[[type]] <- expand.grid(age_cat = unique(DEMOGRAPHIC$age),
                                                  cas_gender = unique(DEMOGRAPHIC$sex),
                                                  cas_mode = unique(injuries_for_model[[1]][[type]]$cas_mode),

@@ -25,7 +25,9 @@ setup_data <- function(seed = 1,
                   MMET_WALKING = 2.53,
                   PM_CONC_BASE = 50,
                   PM_TRANS_SHARE = 0.225,
-                  DAY_TO_WEEK_TRAVEL_SCALAR = 7){
+                  DAY_TO_WEEK_TRAVEL_SCALAR = 7,
+                  SIN_EXPONENT_SUM = 2,
+                  CASUALTY_EXPONENT_FRACTION = 0.5){
   ## Summary of outputs
   # seed = double. sets seed to allow some reproducibility.
   # CITY = string. used to identify input files.
@@ -65,6 +67,8 @@ setup_data <- function(seed = 1,
   DIST_CAT <<- DIST_CAT
   DIST_LOWER_BOUNDS <<- as.numeric(sapply(strsplit(DIST_CAT, "[^0-9]+"), function(x) x[1]))
   BUS_WALK_TIME <<- BUS_WALK_TIME
+  SIN_EXPONENT_SUM <<- SIN_EXPONENT_SUM
+  CASUALTY_EXPONENT_FRACTION <<- CASUALTY_EXPONENT_FRACTION
 
   ## fixed parameters for AP inhalation
   # TODO: we have to define whether we are going to use these values or not

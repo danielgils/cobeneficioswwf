@@ -90,10 +90,12 @@ add_distance_columns <- function(injury_table, mode_names, true_distances_0,
       # apply strike distance sums
       strike_distance_sums <- sapply(mode_names, function(x) sum(strike_dist_summary[[x]]))
       old_length <- length(strike_distance_sums)
+      # Since there are strike modes that are not in casualty modes, such as truck,
+      # then this loop is to assign to it the average distance of other modes
       for (str_mode in strike_modes[!strike_modes %in% names(strike_distance_sums)]) {
         strike_distance_sums <- c(strike_distance_sums,mean(strike_distance_sums))
-        names(strike_distance_sums)[(old_length + 1):length(strike_distance_sums)] <- strike_modes[!strike_modes %in% names(strike_distance_sums)]
       } # End for
+      names(strike_distance_sums)[(old_length + 1):length(strike_distance_sums)] <- strike_modes[!strike_modes %in% names(strike_distance_sums)]
     } # End if
     for (type in INJURY_TABLE_TYPES) { # Loop for whw and nov
       injuries_list[[scen]][[type]] <- injury_table[[type]]
