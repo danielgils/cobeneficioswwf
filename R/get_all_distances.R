@@ -33,7 +33,8 @@ get_all_distances <- function(ithim_object){
   # This is like an estimate for the whole population
   dist <- trip_scen_sets %>%
     group_by(stage_mode, scenario) %>%
-    summarise(ave_dist = sum(stage_distance) / total_synth_pop * sum(pop$population)) %>%
+    summarise(ave_dist = sum(stage_distance) /
+                total_synth_pop * sum(pop$population)) %>%
     spread(scenario, ave_dist) # Spread is like reshape in wide format
 
   # If walk_to_pt is in distance/duration output then sum them and delete walk_to_pt

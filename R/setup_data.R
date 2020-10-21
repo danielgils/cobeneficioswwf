@@ -17,6 +17,7 @@ setup_data <- function(seed = 1,
                   PM_emission_inventory = NULL,
                   setup_call_summary_filename = 'setup_call_summary.txt',
                   DIST_CAT = c("0-6 km", "7-9 km", "10+ km"),
+                  REFERENCE_SCENARIO = 'Baseline',
                   AGE_RANGE = c(0,150),
                   ADD_WALK_TO_BUS_TRIPS = T,
                   PATH_TO_LOCAL_DATA = NULL,
@@ -26,8 +27,13 @@ setup_data <- function(seed = 1,
                   PM_CONC_BASE = 50,
                   PM_TRANS_SHARE = 0.225,
                   DAY_TO_WEEK_TRAVEL_SCALAR = 7,
+                  BACKGROUND_PA_SCALAR = 1,
+                  PA_DOSE_RESPONSE_QUANTILE = F,
+                  AP_DOSE_RESPONSE_QUANTILE = F,
+                  CHRONIC_DISEASE_SCALAR = 1,
                   SIN_EXPONENT_SUM = 2,
-                  CASUALTY_EXPONENT_FRACTION = 0.5){
+                  CASUALTY_EXPONENT_FRACTION = 0.5,
+                  INJURY_REPORTING_RATE = 1){
   ## Summary of outputs
   # seed = double. sets seed to allow some reproducibility.
   # CITY = string. used to identify input files.
@@ -66,9 +72,20 @@ setup_data <- function(seed = 1,
   AGE_RANGE <<- AGE_RANGE
   DIST_CAT <<- DIST_CAT
   DIST_LOWER_BOUNDS <<- as.numeric(sapply(strsplit(DIST_CAT, "[^0-9]+"), function(x) x[1]))
+  REFERENCE_SCENARIO <<- REFERENCE_SCENARIO
   BUS_WALK_TIME <<- BUS_WALK_TIME
+  MMET_CYCLING <<- MMET_CYCLING
+  MMET_WALKING <<- MMET_WALKING
+  PM_CONC_BASE <<- PM_CONC_BASE
+  PM_TRANS_SHARE <<- PM_TRANS_SHARE
+  DAY_TO_WEEK_TRAVEL_SCALAR <<- DAY_TO_WEEK_TRAVEL_SCALAR
+  BACKGROUND_PA_SCALAR <<- BACKGROUND_PA_SCALAR
   SIN_EXPONENT_SUM <<- SIN_EXPONENT_SUM
   CASUALTY_EXPONENT_FRACTION <<- CASUALTY_EXPONENT_FRACTION
+  PA_DOSE_RESPONSE_QUANTILE <<- PA_DOSE_RESPONSE_QUANTILE
+  AP_DOSE_RESPONSE_QUANTILE <<- AP_DOSE_RESPONSE_QUANTILE
+  CHRONIC_DISEASE_SCALAR <<- CHRONIC_DISEASE_SCALAR
+  INJURY_REPORTING_RATE <<- INJURY_REPORTING_RATE
 
   ## fixed parameters for AP inhalation
   # TODO: we have to define whether we are going to use these values or not

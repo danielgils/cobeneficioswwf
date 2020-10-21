@@ -36,6 +36,7 @@ load_data <- function(setup_call_summary_filename,speeds = list(
   DISEASE_INVENTORY <<- read.csv(paste0(global_path, "dose_response/disease_outcomes_lookup.csv"))
   # Importing dose-response for causes related to air pollution
   DR_AP <<- read.csv(paste0(global_path, "dose_response/drap/dose_response.csv"))
+  DR_AP_LIST <<- readRDS(paste0(global_path,"dose_response/drap/dr_ap_list.Rds"))
   # Importing dose-response for causes related to physical activity
   list_of_files <- list.files(path = paste0(global_path,"dose_response/drpa/extdata/"), recursive = TRUE, pattern = "\\.csv$", full.names = TRUE)
   for (i in 1:length(list_of_files)) { # Loop through all files
