@@ -8,13 +8,13 @@ standardize_modes <- function(trip, mode){
   smodes <- smodes %>%
     mutate(across(where(is.character), str_trim))
 
-  if (length(mode) == 1){
+  if (length(mode) == 1) {
     if (mode == 'stage')
       trip$stage_mode <- smodes$exhaustive_list[match(trip$stage_mode, smodes$original)]
     else
       trip$trip_mode <- smodes$exhaustive_list[match(trip$trip_mode, smodes$original)]
-  }else if (length(mode) == 2){
-    if (all(mode %in% c('stage', 'trip'))){
+  }else if (length(mode) == 2) {
+    if (all(mode %in% c('stage', 'trip'))) {
       trip$trip_mode <- smodes$exhaustive_list[match(trip$trip_mode, smodes$original)]
       trip$stage_mode <- smodes$exhaustive_list[match(trip$stage_mode, smodes$original)]
     }
